@@ -15,11 +15,16 @@ class BrowseViewController: UIViewController {
         view?.backgroundColor = UIColor.whiteColor()
         
         title = "Browse"
+        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNew:"), animated: false)
         
         let layout = UICollectionViewFlowLayout()
         let accountNumberListViewController = AccountNumberListViewController(collectionViewLayout: layout)
         addChildViewController(accountNumberListViewController)
         view.addSubview(accountNumberListViewController.view)
+    }
+    
+    func addNew(sender: UIBarButtonItem) {
+        navigationController?.pushViewController(AddViewController(), animated: false)
     }
 }
 

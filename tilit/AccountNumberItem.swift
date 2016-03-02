@@ -15,7 +15,6 @@ class AccountNumberItem : UICollectionViewCell {
     override init(frame: CGRect) {
         
         contactNameLabel = UILabel()
-        contactNameLabel.text = "test"
         contactNameLabel.translatesAutoresizingMaskIntoConstraints = false
             
         accountNumberLabel = UILabel()

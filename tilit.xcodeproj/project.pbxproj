@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		67B198DF1C86035200E3D64E /* AccountNumberItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B198DE1C86035200E3D64E /* AccountNumberItem.swift */; };
 		67B1C4CF1C86287D000992F1 /* AccountNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1C4CE1C86287D000992F1 /* AccountNumber.swift */; };
-		67B1C4D11C8628D7000992F1 /* AccountNumberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1C4D01C8628D7000992F1 /* AccountNumberListViewController.swift */; };
 		67B1C4D71C86543D000992F1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1C4D61C86543D000992F1 /* AddViewController.swift */; };
 		67CDE5061C85D2E7000C0FA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDE5051C85D2E7000C0FA1 /* AppDelegate.swift */; };
 		67CDE5081C85D2E7000C0FA1 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDE5071C85D2E7000C0FA1 /* BrowseViewController.swift */; };
@@ -39,7 +38,6 @@
 /* Begin PBXFileReference section */
 		67B198DE1C86035200E3D64E /* AccountNumberItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountNumberItem.swift; sourceTree = "<group>"; };
 		67B1C4CE1C86287D000992F1 /* AccountNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountNumber.swift; path = tilit/AccountNumber.swift; sourceTree = "<group>"; };
-		67B1C4D01C8628D7000992F1 /* AccountNumberListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountNumberListViewController.swift; sourceTree = "<group>"; };
 		67B1C4D61C86543D000992F1 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		67CDE5021C85D2E7000C0FA1 /* tilit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tilit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67CDE5051C85D2E7000C0FA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				67CDE5071C85D2E7000C0FA1 /* BrowseViewController.swift */,
-				67B1C4D01C8628D7000992F1 /* AccountNumberListViewController.swift */,
 				67B1C4D61C86543D000992F1 /* AddViewController.swift */,
 			);
 			name = Controllers;
@@ -291,7 +288,6 @@
 				67CDE5081C85D2E7000C0FA1 /* BrowseViewController.swift in Sources */,
 				67B1C4CF1C86287D000992F1 /* AccountNumber.swift in Sources */,
 				67B1C4D71C86543D000992F1 /* AddViewController.swift in Sources */,
-				67B1C4D11C8628D7000992F1 /* AccountNumberListViewController.swift in Sources */,
 				67CDE5061C85D2E7000C0FA1 /* AppDelegate.swift in Sources */,
 				67B198DF1C86035200E3D64E /* AccountNumberItem.swift in Sources */,
 			);

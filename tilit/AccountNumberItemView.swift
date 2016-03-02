@@ -1,5 +1,5 @@
 //
-//  AccountNumberItem.swift
+//  AccountNumberItemView.swift
 //  tilit
 //
 //  Created by Touko Hallasmaa on 01.03.16.
@@ -8,13 +8,14 @@
 
 import UIKit
 
-class AccountNumberItem : UICollectionViewCell {
+class AccountNumberItemView : UICollectionViewCell {
     let contactNameLabel: UILabel
     let accountNumberLabel: UILabel
     
     override init(frame: CGRect) {
         
         contactNameLabel = UILabel()
+        contactNameLabel.text = "test"
         contactNameLabel.translatesAutoresizingMaskIntoConstraints = false
             
         accountNumberLabel = UILabel()

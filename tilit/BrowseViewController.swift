@@ -17,15 +17,16 @@ class BrowseViewController: UICollectionViewController {
         
         view?.backgroundColor = UIColor.whiteColor()
         
-        title = "Browse"
-        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNew:"), animated: false)
-        
         accountNumbers.append(AccountNumber(contactName: "test", accountNumber: "123"))
         accountNumbers.append(AccountNumber(contactName: "test2", accountNumber: "321"))
         
         collectionView?.backgroundColor = UIColor.whiteColor()
         
-        collectionView?.registerClass(AccountNumberItem.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView?.registerClass(AccountNumberItemView.self, forCellWithReuseIdentifier: cellIdentifier)
+        
+        // nav
+        title = "Browse"
+        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNew:"), animated: false)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -33,7 +34,7 @@ class BrowseViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! AccountNumberItem
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! AccountNumberItemView
         cell.contactNameLabel.text = accountNumbers[indexPath.item].contactName
         return cell
     }

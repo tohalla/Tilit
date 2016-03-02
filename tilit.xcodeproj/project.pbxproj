@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		67B198DF1C86035200E3D64E /* AccountNumberItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B198DE1C86035200E3D64E /* AccountNumberItem.swift */; };
+		67B198DF1C86035200E3D64E /* AccountNumberItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B198DE1C86035200E3D64E /* AccountNumberItemView.swift */; };
 		67B1C4CF1C86287D000992F1 /* AccountNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1C4CE1C86287D000992F1 /* AccountNumber.swift */; };
 		67B1C4D71C86543D000992F1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1C4D61C86543D000992F1 /* AddViewController.swift */; };
 		67CDE5061C85D2E7000C0FA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDE5051C85D2E7000C0FA1 /* AppDelegate.swift */; };
@@ -36,7 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		67B198DE1C86035200E3D64E /* AccountNumberItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountNumberItem.swift; sourceTree = "<group>"; };
+		67B198DE1C86035200E3D64E /* AccountNumberItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountNumberItemView.swift; sourceTree = "<group>"; };
 		67B1C4CE1C86287D000992F1 /* AccountNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountNumber.swift; path = tilit/AccountNumber.swift; sourceTree = "<group>"; };
 		67B1C4D61C86543D000992F1 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		67CDE5021C85D2E7000C0FA1 /* tilit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tilit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +90,7 @@
 		67B198D81C85E8DF00E3D64E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				67B198DE1C86035200E3D64E /* AccountNumberItem.swift */,
+				67B198DE1C86035200E3D64E /* AccountNumberItemView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 				67B1C4CF1C86287D000992F1 /* AccountNumber.swift in Sources */,
 				67B1C4D71C86543D000992F1 /* AddViewController.swift in Sources */,
 				67CDE5061C85D2E7000C0FA1 /* AppDelegate.swift in Sources */,
-				67B198DF1C86035200E3D64E /* AccountNumberItem.swift in Sources */,
+				67B198DF1C86035200E3D64E /* AccountNumberItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,20 +7,58 @@
 //
 import UIKit
 
-class AddViewController: UIViewController {
+class AddViewController: UITableViewController {
+    private let addView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
+    private let cellIdentifier = "AddItem"
+    private var views = [UIView]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let fieldRect = CGRectMake(0, 0, addView.bounds.width, 30);
         
-        view?.backgroundColor = UIColor.whiteColor()
+        //initialize views
+        let nameField = UITextField(frame: fieldRect)
+        nameField.placeholder = "Account name"
         
+        let accountNumberField = UITextField(frame: fieldRect)
+        accountNumberField.placeholder = "Account number"
+        
+        // append created views
+        views.append(nameField)
+        views.append(accountNumberField)
+        
+        addView.backgroundColor = UIColor.whiteColor()
+        addView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        addView.dataSource = self
+        
+        addView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        view = addView
+        
+        // nav
         title = "Add Account"
         navigationItem.setLeftBarButtonItem(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:"), animated: false)
         navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "add:"), animated: false)
     }
     
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = addView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
+        cell.addSubview(views[indexPath.item])
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return views.count
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
     func cancel(sender: UIBarButtonItem) {
         navigationController?.popToRootViewControllerAnimated(false)
     }
 }
+
 
 

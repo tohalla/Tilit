@@ -9,23 +9,23 @@
 import UIKit
 
 class BrowseViewController: UITableViewController {
-    private let browseView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
     private let cellIdentifier: String = "AccountNumber"
     private var accountNumbers = [AccountNumber]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        browseView.backgroundColor = UIColor.whiteColor()
-        browseView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.allowsSelection = false
         
-        browseView.dataSource = self
-        browseView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        browseView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        view = browseView
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         accountNumbers = loadAccounts()
+        sort(false)
         
         // nav
         title = "Browse"
@@ -33,7 +33,10 @@ class BrowseViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = browseView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        for sv in cell.subviews {
+            sv.removeFromSuperview()
+        }
         cell.addSubview(AccountNumberItemView(accountNumber: accountNumbers[indexPath.item]))
         return cell
     }
@@ -42,11 +45,22 @@ class BrowseViewController: UITableViewController {
         return accountNumbers.count
     }
     
+    // swipe menu for pin, copy and delete actions
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let cell = tableView.cellForRowAtIndexPath(indexPath);
         let pin = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Pin") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+            self.accountNumbers[indexPath.item].pinned = !self.accountNumbers[indexPath.item].pinned
+            self.setEditing(false, animated: true)
+            // refresh views in cell to indicate pin status
+            for view in cell!.subviews {
+                view.removeFromSuperview()
+            }
+            cell!.addSubview(AccountNumberItemView(accountNumber: self.accountNumbers[indexPath.item]))
+            NSKeyedArchiver.archiveRootObject(self.accountNumbers, toFile: AccountNumber.ArchiveURL.path!)
+            self.sort()
         }
         let copy = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Copy") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
             UIPasteboard.generalPasteboard().string = self.accountNumbers[indexPath.item].accountNumber
@@ -64,6 +78,20 @@ class BrowseViewController: UITableViewController {
         return [delete, copy, pin]
     }
     
+    func sort(reloadTableView: Bool = true) {
+        accountNumbers = accountNumbers.sort({(a, b) in
+          return a.pinned && !b.pinned || (a.pinned == b.pinned && a.accountName > b.accountName)
+        })
+        if (reloadTableView) {
+            for cell in tableView.visibleCells {
+                cell.removeFromSuperview()
+            }
+            tableView.reloadData()
+        }
+    }
+
+
+
     func addNew(sender: UIBarButtonItem) {
         let addViewController = AddViewController(style: UITableViewStyle.Plain, saveHandler: addAccount)
         navigationController?.pushViewController(addViewController, animated: false)
@@ -76,7 +104,7 @@ class BrowseViewController: UITableViewController {
     
     func addAccount(accountNumber: AccountNumber) {
         accountNumbers.append(accountNumber)
-        tableView?.insertRowsAtIndexPaths([NSIndexPath(forRow: accountNumbers.count-1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+        sort()
         NSKeyedArchiver.archiveRootObject(accountNumbers, toFile: AccountNumber.ArchiveURL.path!)
     }
 }

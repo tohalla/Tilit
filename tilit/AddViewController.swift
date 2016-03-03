@@ -8,7 +8,6 @@
 import UIKit
 
 class AddViewController: UITableViewController {
-    private let addView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
     private let cellIdentifier = "AddItem"
     private var views = [UIView]()
     private var saveHandler: ((AccountNumber) -> Void)!
@@ -17,7 +16,7 @@ class AddViewController: UITableViewController {
     
     init(style: UITableViewStyle, saveHandler: ((accountNumber: AccountNumber) -> Void)!) {
         self.saveHandler = saveHandler;
-        let fieldRect = CGRectMake(0, 0, addView.bounds.width, 30);
+        let fieldRect = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 30);
         //initialize views
         nameField = UITextField(frame: fieldRect)
         nameField.placeholder = "Account name"
@@ -32,7 +31,7 @@ class AddViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        let iban = UILabel(frame: CGRectMake(0, 0, addView.frame.width, 40))
+        let iban = UILabel(frame: CGRectMake(0, 0, tableView.frame.width, 40))
         super.viewDidLoad()
         
         iban.text = "Insert bank account number in iban format"
@@ -42,14 +41,13 @@ class AddViewController: UITableViewController {
         views.append(accountNumberField)
         views.append(iban)
         
-        addView.backgroundColor = UIColor.whiteColor()
-        addView.separatorStyle = UITableViewCellSeparatorStyle.None
-        addView.allowsSelection = false
+        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.allowsSelection = false
         
-        addView.dataSource = self
+        tableView.dataSource = self
         
-        addView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        view = addView
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         // nav
         title = "Add Account"
@@ -58,7 +56,7 @@ class AddViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = addView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
         cell.addSubview(views[indexPath.item])
         return cell
     }

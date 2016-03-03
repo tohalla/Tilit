@@ -76,6 +76,12 @@ class AddViewController: UITableViewController {
     }
     
     func add(sender: UIBarButtonItem) {
+        if (nameField.text?.characters.count == 0) {
+            let alert = UIAlertController(title: "Name", message: "Insert name for the account", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            presentViewController(alert, animated: false, completion: nil)
+            return
+        }
         if (!AccountNumberHelper.isBankNumberValid(accountNumberField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()))) {
             let alert = UIAlertController(title: "Iban", message: "Entered iban number didn't pass the check", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))

@@ -20,6 +20,7 @@ class BrowseViewController: UITableViewController {
         browseView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         browseView.dataSource = self
+        browseView.delegate = self
         
         browseView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         view = browseView
@@ -39,6 +40,26 @@ class BrowseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accountNumbers.count
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let pin = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Pin") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+        }
+        let share = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+        }
+        let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Delete") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+            self.accountNumbers.removeAtIndex(indexPath.item)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+            NSKeyedArchiver.archiveRootObject(self.accountNumbers, toFile: AccountNumber.ArchiveURL.path!)
+        }
+        pin.backgroundColor = UIColor(red: 0.2, green: 0.8, blue: 0.4, alpha: 1.0)
+        delete.backgroundColor = UIColor(red: 0.9, green: 0.4, blue: 0.1, alpha: 1.0)
+        share.backgroundColor = UIColor(red: 0.16, green: 0.76, blue: 0.96, alpha: 1.0)
+        
+        return [delete, share, pin]
     }
     
     func addNew(sender: UIBarButtonItem) {

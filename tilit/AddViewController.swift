@@ -32,13 +32,19 @@ class AddViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        let iban = UILabel(frame: CGRectMake(0, 0, addView.frame.width, 40))
         super.viewDidLoad()
+        
+        iban.text = "Insert bank account number in iban format"
+        iban.font = UIFont.systemFontOfSize(12)
         
         views.append(nameField)
         views.append(accountNumberField)
+        views.append(iban)
         
         addView.backgroundColor = UIColor.whiteColor()
         addView.separatorStyle = UITableViewCellSeparatorStyle.None
+        addView.allowsSelection = false
         
         addView.dataSource = self
         
@@ -70,6 +76,12 @@ class AddViewController: UITableViewController {
     }
     
     func add(sender: UIBarButtonItem) {
+        if (!AccountNumberHelper.isBankNumberValid(accountNumberField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()))) {
+            let alert = UIAlertController(title: "Iban", message: "Entered iban number didn't pass the check", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            presentViewController(alert, animated: false, completion: nil)
+            return
+        }
         saveHandler(AccountNumber(accountName: nameField.text!, accountNumber: accountNumberField.text!))
         navigationController?.popToRootViewControllerAnimated(false)
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67772C171C88902800510C33 /* AccountNumberHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C161C88902800510C33 /* AccountNumberHelper.swift */; };
 		67B198DF1C86035200E3D64E /* AccountNumberItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B198DE1C86035200E3D64E /* AccountNumberItemView.swift */; };
 		67B1C4CF1C86287D000992F1 /* AccountNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1C4CE1C86287D000992F1 /* AccountNumber.swift */; };
 		67B1C4D71C86543D000992F1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1C4D61C86543D000992F1 /* AddViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		67772C161C88902800510C33 /* AccountNumberHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountNumberHelper.swift; sourceTree = "<group>"; };
 		67B198DE1C86035200E3D64E /* AccountNumberItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountNumberItemView.swift; sourceTree = "<group>"; };
 		67B1C4CE1C86287D000992F1 /* AccountNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountNumber.swift; path = tilit/AccountNumber.swift; sourceTree = "<group>"; };
 		67B1C4D61C86543D000992F1 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67772C151C88901D00510C33 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				67772C161C88902800510C33 /* AccountNumberHelper.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		67B198D71C85E8BA00E3D64E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +137,7 @@
 		67CDE5041C85D2E7000C0FA1 /* tilit */ = {
 			isa = PBXGroup;
 			children = (
+				67772C151C88901D00510C33 /* Util */,
 				67B198D91C85E8E700E3D64E /* Controllers */,
 				67B198D81C85E8DF00E3D64E /* Views */,
 				67B198D71C85E8BA00E3D64E /* Models */,
@@ -286,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67CDE5081C85D2E7000C0FA1 /* BrowseViewController.swift in Sources */,
+				67772C171C88902800510C33 /* AccountNumberHelper.swift in Sources */,
 				67B1C4CF1C86287D000992F1 /* AccountNumber.swift in Sources */,
 				67B1C4D71C86543D000992F1 /* AddViewController.swift in Sources */,
 				67CDE5061C85D2E7000C0FA1 /* AppDelegate.swift in Sources */,

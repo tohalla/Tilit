@@ -34,7 +34,7 @@ class BrowseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = browseView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
-        cell.addSubview(AccountNumberItemView(frame: CGRectMake(0, 0, view.bounds.width, 120), accountNumber: accountNumbers[indexPath.item]))
+        cell.addSubview(AccountNumberItemView(accountNumber: accountNumbers[indexPath.item]))
         return cell
     }
     

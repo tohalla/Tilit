@@ -12,21 +12,23 @@ class AccountNumberItemView: UIView {
     let accountNameLabel: UILabel
     let accountNumberLabel: UILabel
     
-    init(frame: CGRect, accountNumber: AccountNumber) {
+    init(accountNumber: AccountNumber) {
         accountNameLabel = UILabel()
         accountNumberLabel = UILabel()
         
-        super.init(frame: frame)
+        super.init(frame: CGRect.zeroRect)
         
         accountNameLabel.text = accountNumber.accountName
         accountNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        accountNameLabel.font = UIFont.boldSystemFontOfSize(16.0)
         accountNumberLabel.text = accountNumber.accountNumber
         accountNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        accountNumberLabel.font = UIFont.systemFontOfSize(12)
         
         addSubview(accountNameLabel)
         addSubview(accountNumberLabel)
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]-[v1]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": accountNameLabel, "v1": accountNumberLabel]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[v0]-[v1]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": accountNameLabel, "v1": accountNumberLabel]))
     }
     
     required init?(coder aDecoder: NSCoder) {

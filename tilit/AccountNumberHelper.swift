@@ -127,7 +127,8 @@ struct AccountNumberHelper {
     {
         return Int(String(char).unicodeScalars.first!.value) - 55
     }
-
+    
+    // requires separate function due to lack of bigint in swift
     private static func mod97(numericString: String) -> Int64 {
         var numericString = numericString
         while (numericString.characters.count > 2) {

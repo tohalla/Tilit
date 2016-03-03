@@ -11,10 +11,12 @@ class AddViewController: UITableViewController {
     private let cellIdentifier = "AddItem"
     private var views = [UIView]()
     private var saveHandler: ((AccountNumber) -> Void)!
+    private var accountNumbers: [AccountNumber] // for validation
     private var nameField: UITextField
     private var accountNumberField: UITextField
     
-    init(style: UITableViewStyle, saveHandler: ((accountNumber: AccountNumber) -> Void)!) {
+    init(style: UITableViewStyle, accountNumbers: [AccountNumber], saveHandler: ((accountNumber: AccountNumber) -> Void)!) {
+        self.accountNumbers = accountNumbers
         self.saveHandler = saveHandler;
         let fieldRect = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 30);
         //initialize views
@@ -74,20 +76,41 @@ class AddViewController: UITableViewController {
     }
     
     func add(sender: UIBarButtonItem) {
+        if (isValid()) {
+            saveHandler(AccountNumber(accountName: nameField.text!, accountNumber: accountNumberField.text!))
+            navigationController?.popToRootViewControllerAnimated(false)
+        }
+    }
+
+    func isValid() -> Bool {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
         if (nameField.text?.characters.count == 0) {
-            let alert = UIAlertController(title: "Name", message: "Insert name for the account", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            alert.title = "Name"
+            alert.message = "Insert name for the account"
             presentViewController(alert, animated: false, completion: nil)
-            return
+            return false
+        }
+        for accountNumber in accountNumbers {
+            if (accountNumber.accountName == nameField.text) {
+                alert.title = "Name"
+                alert.message = "Duplicate account name found"
+                presentViewController(alert, animated: false, completion: nil)
+                return false
+            } else if (accountNumber.accountNumber == accountNumberField.text) {
+                alert.title = "Iban"
+                alert.message = "Duplicate account number found"
+                presentViewController(alert, animated: false, completion: nil)
+                return false
+            }
         }
         if (!AccountNumberHelper.isBankNumberValid(accountNumberField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()))) {
-            let alert = UIAlertController(title: "Iban", message: "Entered iban number didn't pass the check", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            alert.title = "Iban"
+            alert.message = "Entered iban number didn't pass the check"
             presentViewController(alert, animated: false, completion: nil)
-            return
+            return false
         }
-        saveHandler(AccountNumber(accountName: nameField.text!, accountNumber: accountNumberField.text!))
-        navigationController?.popToRootViewControllerAnimated(false)
+        return true
     }
     
 }

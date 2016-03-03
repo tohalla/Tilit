@@ -93,7 +93,7 @@ class BrowseViewController: UITableViewController {
 
 
     func addNew(sender: UIBarButtonItem) {
-        let addViewController = AddViewController(style: UITableViewStyle.Plain, saveHandler: addAccount)
+        let addViewController = AddViewController(style: UITableViewStyle.Plain, accountNumbers: accountNumbers, saveHandler: addAccount)
         navigationController?.pushViewController(addViewController, animated: false)
     }
     

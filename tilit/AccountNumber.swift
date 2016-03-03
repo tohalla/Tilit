@@ -9,33 +9,33 @@
 import UIKit
 
 class AccountNumber: NSObject, NSCoding {
-    let contactName: String
+    let accountName: String
     let accountNumber: String
     
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("data")
     
     struct PropertyKey {
-        static let contactNameKey = "name"
+        static let accountNameKey = "name"
         static let accountNumberKey = "account"
     }
     
-    init(contactName: String, accountNumber: String) {
-        self.contactName = contactName
+    init(accountName: String, accountNumber: String) {
+        self.accountName = accountName
         self.accountNumber = accountNumber
         
         super.init()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(contactName, forKey: PropertyKey.contactNameKey)
+        aCoder.encodeObject(accountName, forKey: PropertyKey.accountNameKey)
         aCoder.encodeObject(accountNumber, forKey: PropertyKey.accountNumberKey)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let name = aDecoder.decodeObjectForKey(PropertyKey.contactNameKey) as! String
+        let name = aDecoder.decodeObjectForKey(PropertyKey.accountNameKey) as! String
         let account = aDecoder.decodeObjectForKey(PropertyKey.accountNumberKey) as! String
         // Must call designated initializer.
-        self.init(contactName: name, accountNumber: account)
+        self.init(accountName: name, accountNumber: account)
     }
 }

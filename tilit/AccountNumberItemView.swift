@@ -9,24 +9,24 @@
 import UIKit
 
 class AccountNumberItemView : UICollectionViewCell {
-    let contactNameLabel: UILabel
+    let accountNameLabel: UILabel
     let accountNumberLabel: UILabel
     
     override init(frame: CGRect) {
         
-        contactNameLabel = UILabel()
-        contactNameLabel.text = "test"
-        contactNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        accountNameLabel = UILabel()
+        accountNameLabel.text = "test"
+        accountNameLabel.translatesAutoresizingMaskIntoConstraints = false
             
         accountNumberLabel = UILabel()
         accountNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         
         super.init(frame: frame)
             
-        addSubview(contactNameLabel)
+        addSubview(accountNameLabel)
         addSubview(accountNumberLabel)
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": contactNameLabel]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": accountNameLabel]))
     }
     
     required init?(coder aDecoder: NSCoder) {

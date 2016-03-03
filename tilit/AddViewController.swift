@@ -11,19 +11,29 @@ class AddViewController: UITableViewController {
     private let addView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
     private let cellIdentifier = "AddItem"
     private var views = [UIView]()
+    private var saveHandler: ((AccountNumber) -> Void)!
+    private var nameField: UITextField
+    private var accountNumberField: UITextField
+    
+    init(style: UITableViewStyle, saveHandler: ((accountNumber: AccountNumber) -> Void)!) {
+        self.saveHandler = saveHandler;
+        let fieldRect = CGRectMake(0, 0, addView.bounds.width, 30);
+        //initialize views
+        nameField = UITextField(frame: fieldRect)
+        nameField.placeholder = "Account name"
+        
+        accountNumberField = UITextField(frame: fieldRect)
+        accountNumberField.placeholder = "Account number"
+        super.init(style: style)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fieldRect = CGRectMake(0, 0, addView.bounds.width, 30);
         
-        //initialize views
-        let nameField = UITextField(frame: fieldRect)
-        nameField.placeholder = "Account name"
-        
-        let accountNumberField = UITextField(frame: fieldRect)
-        accountNumberField.placeholder = "Account number"
-        
-        // append created views
         views.append(nameField)
         views.append(accountNumberField)
         
@@ -58,6 +68,11 @@ class AddViewController: UITableViewController {
     func cancel(sender: UIBarButtonItem) {
         navigationController?.popToRootViewControllerAnimated(false)
     }
+    func add(sender: UIBarButtonItem) {
+        saveHandler(AccountNumber(accountName: accountNumberField.text!, accountNumber: accountNumberField.text!))
+        navigationController?.popToRootViewControllerAnimated(false)
+    }
+    
 }
 
 

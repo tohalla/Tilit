@@ -17,8 +17,7 @@ class BrowseViewController: UICollectionViewController {
         
         view?.backgroundColor = UIColor.whiteColor()
         
-        accountNumbers.append(AccountNumber(contactName: "test", accountNumber: "123"))
-        accountNumbers.append(AccountNumber(contactName: "test2", accountNumber: "321"))
+        accountNumbers = loadAccounts()
         
         collectionView?.backgroundColor = UIColor.whiteColor()
         
@@ -35,7 +34,7 @@ class BrowseViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! AccountNumberItemView
-        cell.contactNameLabel.text = accountNumbers[indexPath.item].contactName
+        cell.accountNameLabel.text = accountNumbers[indexPath.item].accountName
         return cell
     }
     
@@ -44,7 +43,20 @@ class BrowseViewController: UICollectionViewController {
     }
     
     func addNew(sender: UIBarButtonItem) {
-        navigationController?.pushViewController(AddViewController(), animated: false)
+        let addViewController = AddViewController(style: UITableViewStyle.Plain, saveHandler: addAccount)
+        navigationController?.pushViewController(addViewController, animated: false)
+    }
+
+    
+    func loadAccounts() -> [AccountNumber] {
+        let loaded = NSKeyedUnarchiver.unarchiveObjectWithFile(AccountNumber.ArchiveURL.path!) as? [AccountNumber]
+        return loaded == nil ? [AccountNumber]() : loaded!
+    }
+    
+    func addAccount(accountNumber: AccountNumber) {
+        accountNumbers.append(accountNumber)
+        collectionView?.insertItemsAtIndexPaths([NSIndexPath(forRow: accountNumbers.count-1, inSection: 0)])
+        NSKeyedArchiver.archiveRootObject(accountNumbers, toFile: AccountNumber.ArchiveURL.path!)
     }
 }
 

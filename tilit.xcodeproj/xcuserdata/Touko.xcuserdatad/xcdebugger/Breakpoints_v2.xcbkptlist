@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tilit/BrowseViewController.swift"
-            timestampString = "478683649.055188"
+            timestampString = "478705146.062372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "addNew(_:)"
             landmarkType = "5">
          </BreakpointContent>

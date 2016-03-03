@@ -8,37 +8,36 @@
 
 import UIKit
 
-class BrowseViewController: UICollectionViewController {
+class BrowseViewController: UITableViewController {
+    private let browseView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
     private let cellIdentifier: String = "AccountNumber"
     private var accountNumbers = [AccountNumber]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view?.backgroundColor = UIColor.whiteColor()
+        browseView.backgroundColor = UIColor.whiteColor()
+        browseView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        browseView.dataSource = self
+        
+        browseView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        view = browseView
         
         accountNumbers = loadAccounts()
-        
-        collectionView?.backgroundColor = UIColor.whiteColor()
-        
-        collectionView?.registerClass(AccountNumberItemView.self, forCellWithReuseIdentifier: cellIdentifier)
         
         // nav
         title = "Browse"
         navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addNew:"), animated: false)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(view.frame.width, 40);
-    }
-    
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! AccountNumberItemView
-        cell.accountNameLabel.text = accountNumbers[indexPath.item].accountName
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = browseView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        cell.addSubview(AccountNumberItemView(frame: CGRectMake(0, 0, view.bounds.width, 120), accountNumber: accountNumbers[indexPath.item]))
         return cell
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accountNumbers.count
     }
     
@@ -46,7 +45,6 @@ class BrowseViewController: UICollectionViewController {
         let addViewController = AddViewController(style: UITableViewStyle.Plain, saveHandler: addAccount)
         navigationController?.pushViewController(addViewController, animated: false)
     }
-
     
     func loadAccounts() -> [AccountNumber] {
         let loaded = NSKeyedUnarchiver.unarchiveObjectWithFile(AccountNumber.ArchiveURL.path!) as? [AccountNumber]
@@ -55,7 +53,7 @@ class BrowseViewController: UICollectionViewController {
     
     func addAccount(accountNumber: AccountNumber) {
         accountNumbers.append(accountNumber)
-        collectionView?.insertItemsAtIndexPaths([NSIndexPath(forRow: accountNumbers.count-1, inSection: 0)])
+        tableView?.insertRowsAtIndexPaths([NSIndexPath(forRow: accountNumbers.count-1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
         NSKeyedArchiver.archiveRootObject(accountNumbers, toFile: AccountNumber.ArchiveURL.path!)
     }
 }

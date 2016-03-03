@@ -8,25 +8,25 @@
 
 import UIKit
 
-class AccountNumberItemView : UICollectionViewCell {
+class AccountNumberItemView: UIView {
     let accountNameLabel: UILabel
     let accountNumberLabel: UILabel
     
-    override init(frame: CGRect) {
-        
+    init(frame: CGRect, accountNumber: AccountNumber) {
         accountNameLabel = UILabel()
-        accountNameLabel.text = "test"
-        accountNameLabel.translatesAutoresizingMaskIntoConstraints = false
-            
         accountNumberLabel = UILabel()
-        accountNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         
         super.init(frame: frame)
-            
+        
+        accountNameLabel.text = accountNumber.accountName
+        accountNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        accountNumberLabel.text = accountNumber.accountNumber
+        accountNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(accountNameLabel)
         addSubview(accountNumberLabel)
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": accountNameLabel]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]-[v1]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": accountNameLabel, "v1": accountNumberLabel]))
     }
     
     required init?(coder aDecoder: NSCoder) {

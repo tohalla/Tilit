@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
-        let navController = UINavigationController(rootViewController: BrowseViewController(collectionViewLayout: UICollectionViewFlowLayout()));
+        let navController = UINavigationController(rootViewController: BrowseViewController(style: UITableViewStyle.Plain));
         window?.rootViewController = navController;
         return true
     }

@@ -52,7 +52,7 @@ class AddViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = addView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
+        let cell = addView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
         cell.addSubview(views[indexPath.item])
         return cell
     }
@@ -68,8 +68,9 @@ class AddViewController: UITableViewController {
     func cancel(sender: UIBarButtonItem) {
         navigationController?.popToRootViewControllerAnimated(false)
     }
+    
     func add(sender: UIBarButtonItem) {
-        saveHandler(AccountNumber(accountName: accountNumberField.text!, accountNumber: accountNumberField.text!))
+        saveHandler(AccountNumber(accountName: nameField.text!, accountNumber: accountNumberField.text!))
         navigationController?.popToRootViewControllerAnimated(false)
     }
     

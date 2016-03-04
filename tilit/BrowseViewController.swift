@@ -51,7 +51,7 @@ class BrowseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let cell = tableView.cellForRowAtIndexPath(indexPath);
-        let pin = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Pin") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+        let pin = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: self.accountNumbers[indexPath.item].pinned ? "Unpin" : "Pin") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
             self.accountNumbers[indexPath.item].pinned = !self.accountNumbers[indexPath.item].pinned
             self.setEditing(false, animated: true)
             // refresh views in cell to indicate pin status

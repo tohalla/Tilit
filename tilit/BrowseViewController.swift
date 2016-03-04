@@ -80,7 +80,7 @@ class BrowseViewController: UITableViewController {
     
     func sort(reloadTableView: Bool = true) {
         accountNumbers = accountNumbers.sort({(a, b) in
-          return a.pinned && !b.pinned || (a.pinned == b.pinned && a.accountName > b.accountName)
+            return a.pinned && !b.pinned || (a.pinned == b.pinned && a.accountName.uppercaseString < b.accountName.uppercaseString)
         })
         if (reloadTableView) {
             for cell in tableView.visibleCells {

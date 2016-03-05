@@ -91,13 +91,19 @@ class AddViewController: UITableViewController {
             presentViewController(alert, animated: false, completion: nil)
             return false
         }
+        if (accountNumberField.text?.characters.count == 0) {
+            alert.title = "Iban"
+            alert.message = "Insert account number for the account"
+            presentViewController(alert, animated: false, completion: nil)
+            return false
+        }
         for accountNumber in accountNumbers {
             if (accountNumber.accountName == nameField.text) {
                 alert.title = "Name"
                 alert.message = "Duplicate account name found"
                 presentViewController(alert, animated: false, completion: nil)
                 return false
-            } else if (accountNumber.accountNumber == accountNumberField.text) {
+            } else if (accountNumber.accountNumber.stringByReplacingOccurrencesOfString(" ", withString: "") == accountNumberField.text!.stringByReplacingOccurrencesOfString(" ", withString: "")) {
                 alert.title = "Iban"
                 alert.message = "Duplicate account number found"
                 presentViewController(alert, animated: false, completion: nil)

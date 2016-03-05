@@ -9,8 +9,8 @@
 import UIKit
 
 class AccountNumber: NSObject, NSCoding {
-    let accountName: String
-    let accountNumber: String
+    var accountName: String
+    var accountNumber: String
     var pinned: Bool
     
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
@@ -24,7 +24,14 @@ class AccountNumber: NSObject, NSCoding {
     
     init(accountName: String, accountNumber: String, pinned: Bool = false) {
         self.accountName = accountName
-        self.accountNumber = accountNumber
+        let accountNumber = accountNumber.stringByReplacingOccurrencesOfString(" ", withString: "")
+        self.accountNumber = ""
+        for (index, character) in [Character](accountNumber.characters).enumerate() {
+            if(index % 4 == 0) {
+                self.accountNumber.append(Character(" "))
+            }
+            self.accountNumber.append(character)
+        }
         self.pinned = pinned
         
         super.init()

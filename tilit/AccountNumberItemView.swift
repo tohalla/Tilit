@@ -18,7 +18,7 @@ class AccountNumberItemView: UIView {
         accountNumberLabel = UILabel()
         pinnedIndicator = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 5))
         
-        super.init(frame: CGRect.zeroRect)
+        super.init(frame: CGRect.zero)
 
         accountNameLabel.text = accountNumber.accountName
         accountNameLabel.translatesAutoresizingMaskIntoConstraints = false

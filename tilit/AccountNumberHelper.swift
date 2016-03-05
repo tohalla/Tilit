@@ -102,13 +102,12 @@ struct AccountNumberHelper {
            return false
         }
         var bankNumber = bankNumber!.uppercaseString.stringByReplacingOccurrencesOfString(" ", withString: "")
-        let settings = countrySettings[bankNumber.substringToIndex(advance(bankNumber.startIndex, 2))]
+        let settings = countrySettings[bankNumber.substringToIndex(bankNumber.startIndex.advancedBy(2))]
         if (settings == nil || settings!.length != bankNumber.characters.count as Int) {
             return false
         }
         // move last 4 chars to the end of the string
-        bankNumber = bankNumber.substringFromIndex(advance(bankNumber.startIndex, 4)) + bankNumber.substringToIndex(advance(bankNumber.startIndex, 4))
-        print(bankNumber)
+        bankNumber = bankNumber.substringFromIndex(bankNumber.startIndex.advancedBy(4)) + bankNumber.substringToIndex(bankNumber.startIndex.advancedBy(4))
         // create numeric string for ascii values of the chars
         var numericString = ""
         for char in [Character](bankNumber.characters) {
@@ -133,8 +132,8 @@ struct AccountNumberHelper {
         var numericString = numericString
         while (numericString.characters.count > 2) {
             let len = min(19, numericString.characters.count)
-            let part = (numericString.substringToIndex(advance(numericString.startIndex, len)) as NSString).longLongValue
-            numericString = String(part % 97) + numericString.substringFromIndex(advance(numericString.startIndex, len))
+            let part = (numericString.substringToIndex(numericString.startIndex.advancedBy(len)) as NSString).longLongValue
+            numericString = String(part % 97) + numericString.substringFromIndex(numericString.startIndex.advancedBy(len))
         }
 
         let mod = (numericString as NSString).longLongValue % 97
